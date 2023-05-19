@@ -49,7 +49,7 @@ $contador = 0;
 	<link rel="stylesheet" href="assets/css/style.css">
 
 	<!--==== Iconos ICOMOON =====-->
-	<link rel="stylesheet" href="assets/js/icons/style.css" />
+	<link rel="stylesheet" href="assets/icons/style.css" />
 
 	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 </head>
@@ -167,7 +167,7 @@ $contador = 0;
 								</div>
 
 								<!-- Submit button -->
-								<input type="submit" name="insert" class="btn btn-primary" value="Guardar">
+								<input id="boton" type="submit" name="insert" class="btn btn-primary" value="Guardar">
 							</form>
 							<div id="tablaAlmacenes" class="table-responsive " style="overflow: scroll;height: 600px; margin-top:100px;">
 
@@ -183,7 +183,6 @@ $contador = 0;
 			}
 		}
 		?>
-
 	</main>
 
 	<div class="mx-auto col-lg-9 col-xl-9 col-md-10 pt-60 mb-60">
@@ -192,7 +191,6 @@ $contador = 0;
 		<!--====== BACK TOP TOP PART START ======-->
 		<a href="#" class="back-to-top btn-hover"><i class="lni lni-chevron-up"></i></a>
 		<!--====== BACK TOP TOP PART ENDS ======-->
-
 
 		<!--====== Bootstrap js ======-->
 		<script src="assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
@@ -206,19 +204,13 @@ $contador = 0;
 			if (document.querySelector("#formulario")) {
 				let frm = document.querySelector("#formulario");
 				frm.onsubmit = function(e) {
-					event.preventDefault();
+					e.preventDefault();
 					fntGuardar();
 					reset();
 
 				}
 
 				async function fntGuardar() {
-					let strCodigo = document.querySelector("#codigo").value;
-					let strNombreArea = document.querySelector("#nombreArea").value;
-					let strFecha = document.querySelector("#fecha").value;
-					let strVersion = document.querySelector("#version").value;
-					console.log("Guardar");
-
 					try {
 						const data = new FormData(frm);
 						let res = await fetch('mantenedor/insertarZona.php', {
@@ -227,7 +219,7 @@ $contador = 0;
 						});
 						cargarTabla();
 
-						console.log(res);
+						// console.log(res);
 
 					} catch (error) {
 						console.log("Ocurrio un error " + error);
@@ -244,8 +236,6 @@ $contador = 0;
 			$(document).ready(function() {
 				// Cargar la tabla al cargar la página
 				cargarTabla();
-
-
 			});
 		</script>
 		<script>
@@ -262,6 +252,8 @@ $contador = 0;
 				});
 			}
 		</script>
+
+
 </body>
 
 </html>

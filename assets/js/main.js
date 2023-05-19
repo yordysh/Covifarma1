@@ -56,8 +56,4 @@
         mobile: false
     });
     wow.init();
-
-
-
-
 })();

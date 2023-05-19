@@ -26,12 +26,14 @@ $contador = 0;
         ?>
             <?php foreach ($data as $lista) : ?>
                 <tr>
-                    <td><?php echo $lista->codigo ?></td>
-                    <td><?php echo $lista->nombreArea ?></td>
+                    <td class="codigo"><?php echo $lista->codigo ?></td>
+                    <td class="nombre"><?php echo $lista->nombreArea ?></td>
                     <td><?php echo $lista->fecha ?></td>
                     <td><?php echo $lista->version ?></td>
-                    <td> <a href="mantenedor/editar.php?id=<?php echo $lista->id; ?>" class="btn btn-success" name="editar"><i class="icon-edit"></i></a> </td>
-                    <td> <a href="mostrar.php?id=<?php echo $lista->id; ?>" class="btn btn-danger" name="borrar"><i class="icon-trash"></i></a> </td>
+                    <!-- <td> <a href="tabla.php?id=<?php echo $lista->id; ?>" class="btn btn-success" name="editar"><i class="icon-edit"></i></a> </td>
+                    <td> <a href="mostrar.php?id=<?php echo $lista->id; ?>" class="btn btn-danger" name="borrar"><i class="icon-trash"></i></a> </td> -->
+                    <td><button class="btn btn-success" name="editar" id="edit" onclick="devolverDatos(<? $lista->codigo; ?>)"><i class="icon-edit"></i></button></td>
+                    <td><button class="btn btn-danger" name="eliminar" id="delete" onclick="deolverDatos()"><i class="icon-trash"></i></button></td>
 
                 </tr>
             <?php
@@ -46,3 +48,23 @@ $contador = 0;
         <?php } ?>
     </tbody>
 </table>
+<script>
+    $title = document.querySelector(".title");
+    // $formulario = document.querySelector("#formulario");
+
+    let $btnEdit = document.getElementById('edit');
+    $btnEdit.addEventListener('click', e => {
+        $title.textContent = "EDITAR ZONAS/ÁREAS";
+
+    });
+
+    function devolverDatos(codigo) {
+        $('#codigo').val(codigo);
+        // $('#nombreArea').val(nombreArea);
+        var button = document.getElementById('boton');
+        var nuevoNombre = 'actualiza'; // Nuevo nombre que deseas asignar
+        var nuevoValor = 'Editar';
+        button.name = nuevoNombre;
+        button.value = nuevoValor;
+    }
+</script>

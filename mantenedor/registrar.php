@@ -42,15 +42,19 @@ class m_almacen
       die($e->getMessage());
     }
   }
-  // public function m_buscar($id)
-  // {
-  //   try {
-  //     $query = $this->bd->prepare("SELECT * FROM zonaAreas WHERE $id");
-  //     $query->execute();
-  //     $datos = $query->fetch(PDO::FETCH_OBJ);
-  //     return $datos;
-  //   } catch (Exception $e) {
-  //     print_r("Error en la consulta buscar " . $e);
-  //   }
-  // }
+  public function EditarAlmacen($codigo, $nombreArea, $id)
+  {
+    try {
+
+      $stm = $this->bd->prepare("UPDATE zonaAreas 
+                                  SET ( '$codigo', '$nombreArea')
+                                  WHERE '$id'");
+
+
+      $update = $stm->execute();
+      return $update;
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
 }

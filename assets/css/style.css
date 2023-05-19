@@ -61,12 +61,12 @@ a {
 
 a {
   transition: all 0.3s ease-out 0s;
-  color: #FF6B6B;
+  color: #F9F9F9;
 }
 
 a:hover {
   transition: all 0.3s ease-out 0s;
-  color: #FF6B6B;
+  color: #F9F9F9;
 }
 
 audio,
