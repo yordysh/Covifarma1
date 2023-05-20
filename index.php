@@ -50,6 +50,7 @@ $contador = 0;
 
 	<!--==== Iconos ICOMOON =====-->
 	<link rel="stylesheet" href="assets/icons/style.css" />
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 </head>
@@ -143,7 +144,7 @@ $contador = 0;
 
 								<!-- Text input -->
 								<div class="form-outline mb-4">
-
+									<input id="id" type="hidden" class="form-control" name="id" value="<?php echo $id; ?>" />
 									<input type="text" id="codigo" class="form-control" name="codigo" />
 									<label class="form-label">Código</label>
 								</div>

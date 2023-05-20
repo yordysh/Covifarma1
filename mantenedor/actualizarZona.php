@@ -1,14 +1,17 @@
 <?php
-require_once "./DataBaseA.php";
-require_once "./registrar.php";
+require_once("DataBaseA.php");
 $conexion = new DataBase();
 $dats = $conexion->Conectar();
 
-$mostrar = new m_almacen();
 
-if (isset($_GET['editar'])) {
-    $id = $_GET['id'];
-    $codigo = $_GET['codigo'];
-    $nombreArea = $_GET['nombreArea'];
-    $mostrar->EditarAlmacen($codigo, $nombreArea, $id);
+if (isset($_POST['actualiza'])) {
+    $id = trim($_POST['id']);
+    $codigo = trim($_POST['codigo']);
+    $nombreArea = trim($_POST['nombreArea']);
+    $mostrar->editarAlmacen($codigo, $nombreArea, $id);
+} else {
+    $id = trim($_POST['id']);
+    $codigo = trim($_POST['codigo']);
+    $nombreArea = trim($_POST['nombreArea']);
+    $mostrar->editarAlmacen($codigo, $nombreArea, $id);
 }

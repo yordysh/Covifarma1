@@ -51,7 +51,7 @@ class m_almacen
                                   WHERE '$id'");
 
 
-      $update = $stm->execute();
+      $update = $stm->execute([$codigo], [$nombreArea], [$id]);
       return $update;
     } catch (Exception $e) {
       die($e->getMessage());
