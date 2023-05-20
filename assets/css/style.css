@@ -113,6 +113,13 @@ h1 {
   h1 {
     font-size: 40px;
   }
+  
+}
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 500px;
+    margin: 150px auto;
+}
 }
 
 h2 {
