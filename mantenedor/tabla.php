@@ -7,7 +7,9 @@ $dats = $conexion->Conectar();
 $mostrar = new m_almacen();
 $data = $mostrar->MostrarAlmacenMuestra();
 $contador = 0;
+
 ?>
+
 
 <table id="tbalmacen" class="table table-sm mb-3 table-hover">
     <thead>
@@ -25,16 +27,13 @@ $contador = 0;
             // foreach ($data as $lista) {  
         ?>
             <?php foreach ($data as $lista) : ?>
-                <tr>
+                <tr id="<?php echo $lista->id ?>">
                     <td class="codigo"><?php echo $lista->codigo ?></td>
                     <td class="nombre"><?php echo $lista->nombreArea ?></td>
                     <td><?php echo $lista->fecha ?></td>
                     <td><?php echo $lista->version ?></td>
-                    <!-- <td> <a href="tabla.php?id=<?php echo $lista->id; ?>" class="btn btn-success" name="editar"><i class="icon-edit"></i></a> </td>
-                    <td> <a href="mostrar.php?id=<?php echo $lista->id; ?>" class="btn btn-danger" name="borrar"><i class="icon-trash"></i></a> </td> -->
-                    <!-- <td><button class="btn btn-success" name="editar" id="edit" onclick="devolverDatos(<?php echo $lista->id ?>,'<?php echo $lista->codigo ?>','<?php echo $lista->nombreArea ?>')"><i class="icon-edit"></i></button></td> -->
-                    <td><button class="btn btn-success" name="editar" id="edit" data-bs-toggle="modal" data-bs-target="#miModal"><i class="icon-edit"></i></button></td>
-                    <td><button class="btn btn-danger" name="eliminar" id="delete"><i class="icon-trash"></i></button></td>
+
+                    <td><button class="btn btn-danger delete-btn" name="eliminar" id="delete" data-id="<?php echo $lista->id ?>"><i class="icon-trash"></i></button></td>
 
                 </tr>
             <?php
@@ -49,25 +48,49 @@ $contador = 0;
         <?php } ?>
     </tbody>
 </table>
-<!-- Modal -->
-<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<?php require_once 'modalZona.php' ?>
+<script>
+    // Utilizando jQuery
+    $(document).ready(function() {
+        $('.delete-btn').click(function() {
+            var id = $(this).data('id'); // Obtener el ID del registro a eliminar
+            if (confirm("¿Estás seguro de eliminar este registro?")) {
+                $.ajax({
+                    url: 'mantenedor/eliminar.php', // Ruta del archivo PHP que manejará la eliminación
+                    method: 'POST',
+                    data: {
+                        id: id
+                    }, // Enviar el ID del registro al archivo PHP
+                    success: function(response) {
+                        // Manejar la respuesta del servidor si es necesario
+                        console.log(response);
+                        // Actualizar la vista o hacer otras acciones después de eliminar el registro
+                    },
+                    error: function(xhr, status, error) {
+                        // Manejar los errores de la solicitud AJAX si es necesario
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#tbalmacen').Tabledit({
+            deleteButton: false,
+            editButton: false,
+            columns: {
+                identifier: [0, 'id'],
+                editable: [
+                    [1, 'nombreArea']
+                ]
+            },
+            hideIdentifier: true,
+            url: 'mantenedor/actualizarZona.php'
+        });
+    });
+</script>
 <script>
     // $title = document.querySelector(".title");
     // $formulario = document.querySelector("#formulario");

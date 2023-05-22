@@ -1,17 +1,15 @@
 <?php
-require_once("DataBaseA.php");
-$conexion = new DataBase();
-$dats = $conexion->Conectar();
+require_once("db_connect.php");
 
 
-if (isset($_POST['actualiza'])) {
-    $id = trim($_POST['id']);
-    $codigo = trim($_POST['codigo']);
-    $nombreArea = trim($_POST['nombreArea']);
-    $mostrar->editarAlmacen($codigo, $nombreArea, $id);
-} else {
-    $id = trim($_POST['id']);
-    $codigo = trim($_POST['codigo']);
-    $nombreArea = trim($_POST['nombreArea']);
-    $mostrar->editarAlmacen($codigo, $nombreArea, $id);
+
+$input = filter_input_array(INPUT_POST);
+if ($input['action'] == 'edit') {
+    $id = $input['id'];
+    $nombreArea = $input['nombreArea'];
+    $sql_query = "UPDATE zonaAreas SET nombreArea = :nombreArea WHERE id = :id";
+    $stmt = $conn->prepare($sql_query);
+    $stmt->bindParam(':nombreArea', $nombreArea, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
 }

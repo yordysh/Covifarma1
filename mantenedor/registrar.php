@@ -42,17 +42,32 @@ class m_almacen
       die($e->getMessage());
     }
   }
-  public function EditarAlmacen($codigo, $nombreArea, $id)
+  public function EditarAlmacen($nombreArea, $id)
   {
     try {
 
       $stm = $this->bd->prepare("UPDATE zonaAreas 
-                                  SET ( '$codigo', '$nombreArea')
+                                  SET ('$nombreArea')
                                   WHERE '$id'");
 
 
-      $update = $stm->execute([$codigo], [$nombreArea], [$id]);
+      $update = $stm->execute([$nombreArea], [$id]);
       return $update;
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
+  public function EliminarAlmacen($id)
+  {
+    try {
+
+      $stm = $this->bd->prepare("DELETE FROM zonaAreas 
+                                  
+                                  WHERE '$id'");
+
+
+      $delete = $stm->execute([$id]);
+      return $delete;
     } catch (Exception $e) {
       die($e->getMessage());
     }

@@ -52,7 +52,8 @@ $contador = 0;
 	<link rel="stylesheet" href="assets/icons/style.css" />
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
 
-	<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="assets/js/jquery-tabledit/jquery.tabledit.js"></script>
 </head>
 
 <body>
@@ -170,6 +171,23 @@ $contador = 0;
 								<!-- Submit button -->
 								<input id="boton" type="submit" name="insert" class="btn btn-primary" value="Guardar">
 							</form>
+							<table id="miTabla">
+								<thead>
+									<tr>
+										<th>Columna 1</th>
+										<th>Columna 2</th>
+										<th>Columna 3</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Valor 1</td>
+										<td>Valor 2</td>
+										<td>Valor 3</td>
+									</tr>
+									<!-- Agrega más filas de datos si es necesario -->
+								</tbody>
+							</table>
 							<div id="tablaAlmacenes" class="table-responsive " style="overflow: scroll;height: 600px; margin-top:100px;">
 
 							</div>
@@ -200,6 +218,8 @@ $contador = 0;
 		<script src="assets/js/main.js"></script>
 		<!--====== Sombreo de fila table ======-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
 
 		<script>
 			if (document.querySelector("#formulario")) {
