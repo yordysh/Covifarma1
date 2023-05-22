@@ -42,34 +42,17 @@ class m_almacen
       die($e->getMessage());
     }
   }
-  public function EditarAlmacen($nombreArea, $id)
+  public function eliminarAlmacen($id)
   {
     try {
 
-      $stm = $this->bd->prepare("UPDATE zonaAreas 
-                                  SET ('$nombreArea')
-                                  WHERE '$id'");
+      $stm = $this->bd->prepare("DELETE FROM zonaAreas WHERE id = :id");
+      $stm->bindParam(':id', $id, PDO::PARAM_INT);
 
-
-      $update = $stm->execute([$nombreArea], [$id]);
-      return $update;
-    } catch (Exception $e) {
-      die($e->getMessage());
-    }
-  }
-  public function EliminarAlmacen($id)
-  {
-    try {
-
-      $stm = $this->bd->prepare("DELETE FROM zonaAreas 
-                                  
-                                  WHERE '$id'");
-
-
-      $delete = $stm->execute([$id]);
+      $delete = $stm->execute();
       return $delete;
     } catch (Exception $e) {
-      die($e->getMessage());
+      die("Error al eliminar los datos: " . $e->getMessage());
     }
   }
 }

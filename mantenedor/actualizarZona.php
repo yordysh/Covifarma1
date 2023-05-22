@@ -8,12 +8,16 @@ $conn = $conexion->Conectar();
 
 
 $input = filter_input_array(INPUT_POST);
-if ($input['action'] == 'edit') {
-    $id = $input['id'];
-    $nombreArea = $input['nombreArea'];
-    $sql_query = "UPDATE zonaAreas SET nombreArea = :nombreArea WHERE id = :id";
-    $stmt = $conn->prepare($sql_query);
-    $stmt->bindParam(':nombreArea', $nombreArea, PDO::PARAM_STR);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
+try {
+    if ($input['action'] == 'edit') {
+        $id = $input['id'];
+        $nombreArea = $input['nombreArea'];
+        $sql_query = "UPDATE zonaAreas SET nombreArea = :nombreArea WHERE id = :id";
+        $stmt = $conn->prepare($sql_query);
+        $stmt->bindParam(':nombreArea', $nombreArea, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+} catch (Exception $e) {
+    echo "Ocurrió un error con la base de datos: " . $e;
 }

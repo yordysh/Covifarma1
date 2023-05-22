@@ -1,8 +1,8 @@
 <?php
-$servername = "YORDY";
+$servername = "DESKTOP-C8GLM7A";
 $database = "monitoring";
 $username = "sa";
-$password = "70836940";
+$password = "123";
 try {
     $conn = new PDO("sqlsrv:Server=$servername;Database=$database", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -201,7 +201,8 @@ $contador = 0;
 		<script src="assets/js/main.js"></script>
 		<!--====== Sombreo de fila table ======-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
+		<!--====== Alertas configuradas ======-->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 		<script>

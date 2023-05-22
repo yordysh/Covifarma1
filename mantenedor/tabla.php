@@ -14,6 +14,7 @@ $contador = 0;
 <table id="tbalmacen" class="table table-sm mb-3 table-hover">
     <thead>
         <tr>
+            <th class="thtitulo" scope="col">Id</th>
             <th class="thtitulo" scope="col">CODIGO</th>
             <th class="thtitulo" scope="col">NOMBRE DE AREA</th>
             <th class="thtitulo" scope="col">FECHA</th>
@@ -27,7 +28,8 @@ $contador = 0;
             // foreach ($data as $lista) {  
         ?>
             <?php foreach ($data as $lista) : ?>
-                <tr id="<?php echo $lista->id ?>">
+                <tr id="<?php echo $lista->id; ?>">
+                    <td><?php echo $lista->id ?></td>
                     <td class="codigo"><?php echo $lista->codigo ?></td>
                     <td class="nombre"><?php echo $lista->nombreArea ?></td>
                     <td><?php echo $lista->fecha ?></td>
@@ -48,13 +50,31 @@ $contador = 0;
         <?php } ?>
     </tbody>
 </table>
-<?php require_once 'modalZona.php' ?>
-<!-- Script de eliminar dato -->
+<!-- Script de Editar -->
+<script>
+    $(document).ready(function() {
+        $('#tbalmacen').Tabledit({
+            deleteButton: false,
+            editButton: false,
+            columns: {
+                identifier: [0, 'id'],
+                editable: [
+                    [2, 'nombreArea']
+                ]
+            },
+            hideIdentifier: true,
+            url: 'mantenedor/actualizarZona.php'
+        });
+    });
+</script>
+<!-- Script de Eliminar -->
 <script>
     // Utilizando jQuery
     $(document).ready(function() {
         $('.delete-btn').click(function() {
             var id = $(this).data('id'); // Obtener el ID del registro a eliminar
+            var button = $(this); // Guardar referencia al botón actual
+
             if (confirm("¿Estás seguro de eliminar este registro?")) {
                 $.ajax({
                     url: 'mantenedor/eliminar.php', // Ruta del archivo PHP que manejará la eliminación
@@ -65,7 +85,12 @@ $contador = 0;
                     success: function(response) {
                         // Manejar la respuesta del servidor si es necesario
                         console.log(response);
-                        // Actualizar la vista o hacer otras acciones después de eliminar el registro
+
+                        // Eliminar la fila de la tabla correspondiente al botón eliminado
+                        button.closest('tr').remove();
+
+                        // Mostrar una notificación o mensaje de éxito
+                        alert('Registro eliminado correctamente.');
                     },
                     error: function(xhr, status, error) {
                         // Manejar los errores de la solicitud AJAX si es necesario
@@ -76,83 +101,4 @@ $contador = 0;
         });
     });
 </script>
-<!-- Script de Editar -->
-<script>
-    $(document).ready(function() {
-        $('#tbalmacen').Tabledit({
-            deleteButton: false,
-            editButton: false,
-            columns: {
-                identifier: [0, 'id'],
-                editable: [
-                    [1, 'nombreArea']
-                ]
-            },
-            hideIdentifier: true,
-            url: 'mantenedor/actualizarZona.php'
-        });
-    });
-</script>
-<script>
-    // $title = document.querySelector(".title");
-    // $formulario = document.querySelector("#formulario");
-
-    // let $btnEdit = document.getElementById('edit');
-    // $btnEdit.addEventListener('click', e => {
-    //     $title.textContent = "EDITAR ZONAS/ÁREAS";
-    //     var button = document.getElementById('boton');
-
-    //     var nuevoNombre = 'actualiza';
-    //     var nuevoValor = 'Editar';
-    //     button.name = nuevoNombre;
-    //     button.value = nuevoValor;
-    //     var cambio = button.name = nuevoNombre;
-
-
-    // });
-
-    function devolverDatos(id, codigo, nombreArea) {
-        $title = document.querySelector(".title");
-        $title.textContent = "EDITAR ZONAS/ÁREAS";
-
-        var button = document.getElementById('boton');
-
-        var nuevoNombre = 'actualiza';
-        var nuevoValor = 'Editar';
-        button.name = nuevoNombre;
-        button.value = nuevoValor;
-
-
-
-        $('#id').val(id);
-        $('#codigo').val(codigo);
-        $('#nombreArea').val(nombreArea);
-
-        fntActualizar();
-
-
-    }
-</script>
-<script>
-    async function fntActualizar() {
-        try {
-            let frm = document.querySelector("#formulario");
-            const data = new FormData(frm);
-            let res = await fetch('actualizarZona.php', {
-                method: 'POST',
-                body: data
-            });
-            cargarTabla();
-
-            // console.log(res);
-
-        } catch (error) {
-            console.log("Ocurrio un error " + error);
-        }
-    }
-
-    function reset() {
-        let frm = document.querySelector("#formulario");
-        frm.reset();
-    }
-</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
