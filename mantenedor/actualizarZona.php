@@ -1,5 +1,9 @@
 <?php
-require_once("db_connect.php");
+// require_once("db_connect.php");
+require_once("DataBaseA.php");
+require_once("registrar.php");
+$conexion = new DataBase();
+$conn = $conexion->Conectar();
 
 
 

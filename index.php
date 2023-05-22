@@ -171,23 +171,6 @@ $contador = 0;
 								<!-- Submit button -->
 								<input id="boton" type="submit" name="insert" class="btn btn-primary" value="Guardar">
 							</form>
-							<table id="miTabla">
-								<thead>
-									<tr>
-										<th>Columna 1</th>
-										<th>Columna 2</th>
-										<th>Columna 3</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Valor 1</td>
-										<td>Valor 2</td>
-										<td>Valor 3</td>
-									</tr>
-									<!-- Agrega más filas de datos si es necesario -->
-								</tbody>
-							</table>
 							<div id="tablaAlmacenes" class="table-responsive " style="overflow: scroll;height: 600px; margin-top:100px;">
 
 							</div>

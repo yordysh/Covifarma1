@@ -49,6 +49,7 @@ $contador = 0;
     </tbody>
 </table>
 <?php require_once 'modalZona.php' ?>
+<!-- Script de eliminar dato -->
 <script>
     // Utilizando jQuery
     $(document).ready(function() {
@@ -75,6 +76,7 @@ $contador = 0;
         });
     });
 </script>
+<!-- Script de Editar -->
 <script>
     $(document).ready(function() {
         $('#tbalmacen').Tabledit({
