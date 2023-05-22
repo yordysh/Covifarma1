@@ -35,7 +35,7 @@ $contador = 0;
                     <td><?php echo $lista->fecha ?></td>
                     <td><?php echo $lista->version ?></td>
 
-                    <td><button class="btn btn-danger delete-btn" name="eliminar" id="delete" data-id="<?php echo $lista->id ?>"><i class="icon-trash"></i></button></td>
+                    <!-- <td><button class="btn btn-danger delete-btn" name="eliminar" id="delete" data-id="<?php echo $lista->id ?>"><i class="icon-trash"></i></button></td> -->
 
                 </tr>
             <?php
@@ -67,6 +67,7 @@ $contador = 0;
         });
     });
 </script>
+
 <!-- Script de Eliminar -->
 <script>
     // Utilizando jQuery
