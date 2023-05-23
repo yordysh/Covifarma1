@@ -1,6 +1,7 @@
 <?php
 require_once "mantenedor/DataBaseA.php";
 require_once "mantenedor/registrar.php";
+
 $conexion = new DataBase();
 $dats = $conexion->Conectar();
 
@@ -54,7 +55,9 @@ $contador = 0;
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="assets/js/jquery-tabledit/jquery.tabledit.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<!--==== Estilos de SWEETALERT2 =====-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -147,8 +150,8 @@ $contador = 0;
 								<!-- Text input -->
 								<div class="form-outline mb-4">
 									<input id="id" type="hidden" class="form-control" name="id" value="<?php echo $id; ?>" />
-									<input type="text" id="codigo" class="form-control" name="codigo" />
-									<label class="form-label">Código</label>
+									<input type="hidden" id="codigo" class="form-control" name="codigo" />
+									<label style="display: none;" class="form-label">Código</label>
 								</div>
 
 								<!-- Text input -->
@@ -223,14 +226,14 @@ $contador = 0;
 							method: 'POST',
 							body: data
 						});
-						console.log(res);
+						// console.log(res);
 						cargarTabla();
 
 						let responseContent = await res.text();
-						console.log(responseContent);
+						// console.log(responseContent);
 						cargarTabla();
 
-						if (responseContent.trim() === '1') {
+						if (responseContent.trim() == '1') {
 							Swal.fire({
 								title: 'Éxito',
 								text: 'La respuesta fue correcta',

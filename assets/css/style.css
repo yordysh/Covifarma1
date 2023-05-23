@@ -103,6 +103,10 @@ h1 {
   font-size: 45px;
 }
 
+.mostrar {
+  display: table-row !important;
+}
+
 @media (max-width: 767px) {
   h1 {
     font-size: 36px;
