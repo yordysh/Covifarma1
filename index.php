@@ -54,6 +54,7 @@ $contador = 0;
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="assets/js/jquery-tabledit/jquery.tabledit.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -158,7 +159,7 @@ $contador = 0;
 
 								<!-- Text input -->
 								<div class="form-outline mb-4">
-									<input type="text" id="fecha" class="form-control" name="fecha" />
+									<input type="date" id="fecha" class="form-control" name="fecha" />
 									<label class="form-label">Fecha</label>
 								</div>
 
@@ -222,13 +223,33 @@ $contador = 0;
 							method: 'POST',
 							body: data
 						});
+						console.log(res);
 						cargarTabla();
 
-						// console.log(res);
+						let responseContent = await res.text();
+						console.log(responseContent);
+						cargarTabla();
 
+						if (responseContent.trim() === '1') {
+							Swal.fire({
+								title: 'Éxito',
+								text: 'La respuesta fue correcta',
+								icon: 'success',
+								confirmButtonText: 'Aceptar'
+							});
+						} else {
+							Swal.fire({
+								title: 'Error',
+								text: 'La respuesta no fue correcta',
+								icon: 'error',
+								confirmButtonText: 'Aceptar'
+							});
+
+						}
 					} catch (error) {
-						console.log("Ocurrio un error " + error);
+						console.log("Ocurrió un error: " + error);
 					}
+
 				}
 
 				function reset() {
