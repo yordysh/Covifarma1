@@ -1,6 +1,7 @@
 <?php
 require_once "DataBaseA.php";
 require_once "registrar.php";
+require_once "funciones/f_funcion.php";
 
 $conexion = new DataBase();
 $dats = $conexion->Conectar();
@@ -33,9 +34,10 @@ $contador = 0;
                     <td><?php echo $lista->id ?></td>
                     <td class="codigo"><?php echo $lista->codigo ?></td>
                     <td class="nombre"><?php echo $lista->nombreArea ?></td>
-                    <td><?php echo $lista->fecha ?></td>
+                    <td><?php $fecha = $lista->fecha;
+                        echo convFecSistema($fecha) ?></td>
                     <td><?php echo $lista->version ?></td>
-                    <td><button class="btn btn-success edit-btn" name="editar" id="edit" data-id="<?php echo $lista->id ?>"><i class="icon-edit"></i></button></td>
+
                     <td><button class="btn btn-danger delete-btn" name="eliminar" id="delete" data-id="<?php echo $lista->id ?>"><i class="icon-trash"></i></button></td>
 
                 </tr>

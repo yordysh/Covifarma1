@@ -12,12 +12,12 @@ if (isset($_POST['insert'])) {
     $nombreArea = trim($_POST['nombreArea']);
     $fecha = trim($_POST['fecha']);
     $version = trim($_POST['version']);
-    $mostrar->InsertarAlmacen($nombreArea, $fecha, $version);
+    $mostrar->InsertarAlmacen($nombreArea, $fecha);
 } else {
     $codigo = trim($_POST['codigo']);
     $nombreArea = trim($_POST['nombreArea']);
-    $fecha = trim($_POST['fecha']);
-    $version = trim($_POST['version']);
+    // $fecha = trim($_POST['fecha']);
+    // $version = trim($_POST['version']);
     $consulta = "SELECT COUNT(*) AS total FROM zonaAreas WHERE  nombreArea = :nombreArea";
     $resultado = $dats->prepare($consulta);
     // $resultado->bindParam(':codigo', $codigo);
@@ -31,7 +31,7 @@ if (isset($_POST['insert'])) {
     if ($total > 0) {
         echo "0";
     } else {
-        $mostrar->InsertarAlmacen($nombreArea, $fecha, $version);
+        $mostrar->InsertarAlmacen($nombreArea, $fecha);
         echo "1";
     }
 }

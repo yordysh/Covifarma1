@@ -17,10 +17,12 @@ class m_almacen
   {
     try {
 
+
       $stm = $this->bd->prepare("SELECT * FROM zonaAreas");
 
       $stm->execute();
       $datos = $stm->fetchAll(PDO::FETCH_OBJ);
+
       return $datos;
     } catch (Exception $e) {
       die($e->getMessage());
@@ -38,20 +40,42 @@ class m_almacen
     return $codigoAumento;
   }
 
+  public function generarVersion()
+  {
+    $stm = $this->bd->prepare("SELECT MAX(version) as version FROM version");
+    $stm->execute();
+    $resultado = $stm->fetch(PDO::FETCH_ASSOC);
+    $maxContadorVersion = $resultado['version'];
+    $nuevaversion = $maxContadorVersion + 1;
+    $versionAumento = str_pad($nuevaversion, 2, '0', STR_PAD_LEFT);
+    return $versionAumento;
+  }
 
-  public function InsertarAlmacen($nombreArea, $fecha, $version)
+  public function InsertarAlmacen($nombreArea, $fecha)
   {
     try {
       if (empty($fecha)) {
         $fecha = retunrFechaActualphp();
       }
+
       $cod = new m_almacen();
       $codigo = $cod->generarCodigo();
+      $version = $cod->generarVersion();
+
+      $this->bd->beginTransaction();
       $stm = $this->bd->prepare("INSERT INTO zonaAreas (codigo, nombreArea, fecha, version) 
                                   VALUES ( '$codigo', '$nombreArea', '$fecha', '$version')");
 
 
       $insert = $stm->execute();
+
+      $stm1 = $this->bd->prepare("insert into version(version) values($version)");
+      $stm1->execute();
+      if ($stm1->execute()) {
+        $this->bd->commit();
+      } else {
+        $this->bd->rollBack();
+      }
       return $insert;
     } catch (Exception $e) {
       die($e->getMessage());
@@ -62,11 +86,16 @@ class m_almacen
   {
     try {
 
-      $stmt = $this->bd->prepare("UPDATE zonaAreas SET nombreArea = :nombreArea WHERE id = :id");
+      $stmt = $this->bd->prepare("UPDATE zonaAreas SET nombreArea = :nombreArea  WHERE id = :id");
+
+      // $versionModifico = new m_almacen();
+      // $version = $versionModifico->generarVersion();
 
       $stmt->bindParam(':nombreArea', $nombreArea, PDO::PARAM_STR);
+      // $stmt->bindParam(':version', $version, PDO::PARAM_STR);
       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       $update = $stmt->execute();
+      // $stm1 = "insert into version(version) values($version)";
       return $update;
     } catch (Exception $e) {
       die($e->getMessage());
@@ -83,6 +112,42 @@ class m_almacen
       return $delete;
     } catch (Exception $e) {
       die("Error al eliminar los datos: " . $e->getMessage());
+    }
+  }
+
+  public function MostrarInfraestructura()
+  {
+    try {
+
+
+      $stm = $this->bd->prepare("SELECT * FROM infraestructuraAccesorios");
+
+      $stm->execute();
+      $datos = $stm->fetchAll(PDO::FETCH_OBJ);
+
+      return $datos;
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function insertarInfraestructura($codigo, $nombreAccesorio, $fecha, $nDias, $usuario)
+  {
+    try {
+      if (empty($fecha)) {
+        $fecha = retunrFechaActualphp();
+      }
+
+      $cod = new m_almacen();
+      $codigo = $cod->generarCodigo();
+
+      $stm = $this->bd->prepare("INSERT INTO infraestructuraAccesorios (codigo,nombreAccesorio,nDias, fecha, usuario) 
+                                  VALUES ('$codigo', '$nombreAccesorio','$nDias', '$fecha', '$usuario')");
+
+      $insert = $stm->execute();
+      return $insert;
+    } catch (Exception $e) {
+      die($e->getMessage());
     }
   }
 }

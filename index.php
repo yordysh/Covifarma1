@@ -5,9 +5,9 @@ require_once "mantenedor/registrar.php";
 $conexion = new DataBase();
 $dats = $conexion->Conectar();
 
-$mostrar = new m_almacen();
-$data = $mostrar->MostrarAlmacenMuestra();
-$contador = 0;
+// $mostrar = new m_almacen();
+// $data = $mostrar->MostrarAlmacenMuestra();
+
 ?>
 
 <!doctype html>
@@ -28,20 +28,8 @@ $contador = 0;
 	<!--====== Animate CSS ======-->
 	<!-- <link rel="stylesheet" href="assets/css/animate.css"> -->
 
-	<!--====== Tiny slider CSS ======-->
-	<!-- <link rel="stylesheet" href="assets/css/tiny-slider.css"> -->
-
-	<!--====== glightbox CSS ======-->
-	<!-- <link rel="stylesheet" href="assets/css/glightbox.min.css"> -->
-
 	<!--====== Line Icons CSS ======-->
 	<link rel="stylesheet" href="assets/css/LineIcons.2.0.css">
-
-	<!--====== Selectr CSS ======-->
-	<!-- <link rel="stylesheet" href="assets/css/selectr.css"> -->
-
-	<!--====== Nouislider CSS ======-->
-	<!-- <link rel="stylesheet" href="assets/css/nouislider.css"> -->
 
 	<!--====== Bootstrap CSS ======-->
 	<link rel="stylesheet" href="assets/css/bootstrap-5.0.5-alpha.min.css">
@@ -160,17 +148,17 @@ $contador = 0;
 									<label class="form-label">Nombre de área</label>
 								</div>
 
-								<!-- Text input -->
-								<div class="form-outline mb-4">
+								<!-- Text input fecha-->
+								<!-- <div class="form-outline mb-4">
 									<input type="date" id="fecha" class="form-control" name="fecha" />
 									<label class="form-label">Fecha</label>
-								</div>
+								</div> -->
 
-								<!-- Email input -->
-								<div class="form-outline mb-4">
+								<!-- Email input version-->
+								<!-- <div class="form-outline mb-4">
 									<input type="text" id="version" class="form-control" name="version" />
 									<label class="form-label">Version</label>
-								</div>
+								</div> -->
 
 								<!-- Submit button -->
 								<input id="boton" type="submit" name="insert" class="btn btn-primary" value="Guardar">
@@ -181,10 +169,52 @@ $contador = 0;
 						</div>
 					</div>
 				</section>
-		<?php
+				<?php
 			} else {
-				if ($xlista == "infra") {
-					include 'infraestructura.php';
+				if ($xlista == "infra") { ?>
+					<section>
+						<div class="container g-4 mt-100 row">
+							<div class="row g-4 top-div">
+								<center><label class="title">INFRAESTRUCTURA, ACCESORIOS COMPLEMENTARIOS</label></center>
+							</div>
+							<div class="main">
+								<form method="post" id="formularioInfra">
+
+									<!-- Text input -->
+									<div class="form-outline mb-4">
+										<input id="id" type="hidden" class="form-control" name="id" value="<?php echo $id; ?>" />
+										<input type="hidden" id="codigo" class="form-control" name="codigo" />
+										<label style="display: none;" class="form-label">Código</label>
+									</div>
+
+									<!-- Text input -->
+									<div class="form-outline mb-4">
+										<input type="text" id="nombreAccesorio" class="form-control" name="nombreAccesorio" required>
+										<label class="form-label">Nombre</label>
+									</div>
+
+									<!-- Text input fecha-->
+									<!-- <div class="form-outline mb-4">
+									<input type="date" id="fecha" class="form-control" name="fecha" />
+									<label class="form-label">Fecha</label>
+								</div> -->
+
+									<!-- Email input version-->
+									<!-- <div class="form-outline mb-4">
+									<input type="text" id="version" class="form-control" name="version" />
+									<label class="form-label">Version</label>
+								</div> -->
+
+									<!-- Submit button -->
+									<input id="boton" type="submit" name="insert" class="btn btn-primary" value="Guardar">
+								</form>
+								<div id="tablaInfra" class="table-responsive " style="overflow: scroll;height: 600px; margin-top:100px;">
+
+								</div>
+							</div>
+						</div>
+					</section>
+		<?php
 				}
 			}
 		}
@@ -208,81 +238,9 @@ $contador = 0;
 		<!--====== Alertas configuradas ======-->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-		<script>
-			if (document.querySelector("#formulario")) {
-				let frm = document.querySelector("#formulario");
-				frm.onsubmit = function(e) {
-					e.preventDefault();
-					fntGuardar();
-					reset();
-
-				}
-
-				async function fntGuardar() {
-					try {
-						const data = new FormData(frm);
-						let res = await fetch('mantenedor/insertarZona.php', {
-							method: 'POST',
-							body: data
-						});
-						// console.log(res);
-						cargarTabla();
-
-						let responseContent = await res.text();
-						// console.log(responseContent);
-						cargarTabla();
-
-						if (responseContent.trim() == '1') {
-							Swal.fire({
-								title: 'Éxito',
-								text: 'La respuesta fue correcta',
-								icon: 'success',
-								confirmButtonText: 'Aceptar'
-							});
-						} else {
-							Swal.fire({
-								title: 'Error',
-								text: 'La respuesta no fue correcta',
-								icon: 'error',
-								confirmButtonText: 'Aceptar'
-							});
-
-						}
-					} catch (error) {
-						console.log("Ocurrió un error: " + error);
-					}
-
-				}
-
-				function reset() {
-					let frm = document.querySelector("#formulario");
-					frm.reset();
-				}
-			}
-		</script>
-		<script>
-			$(document).ready(function() {
-				// Cargar la tabla al cargar la página
-				cargarTabla();
-			});
-		</script>
-		<script>
-			function cargarTabla() {
-				$.ajax({
-					url: 'mantenedor/tabla.php',
-					type: 'GET',
-					success: function(data) {
-						$("#tablaAlmacenes").html(data);
-					},
-					error: function(xhr, status, error) {
-						console.error('Error al cargar los datos de la tabla:', error);
-					}
-				});
-			}
-		</script>
-
-
+		<!--====== Script de mantenedor ======-->
+		<script src="mantenedor/js/mantenedor.js"></script>
+	</div>
 </body>
 
 </html>
