@@ -12,10 +12,10 @@ $datos = $mostrar->MostrarInfraestructura();
 
 ?>
 
-<table class="table table-sm mb-3 table-hover">
+<table id="tbInfra" class="table table-sm mb-3 table-hover">
     <thead>
         <tr>
-            <!-- <th class="thtitulo" scope="col">Id</th> -->
+            <th class="thtitulo" scope="col">Id</th>
             <th class="thtitulo" scope="col">CODIGO</th>
             <th class="thtitulo" scope="col">NOMBRE DE AREA</th>
             <th class="thtitulo" scope="col">N°DIAS</th>
@@ -31,9 +31,9 @@ $datos = $mostrar->MostrarInfraestructura();
         ?>
             <?php foreach ($datos as $list) { ?>
                 <tr id="<?php echo $list->id; ?>">
-                    <!-- <td><?php echo $list->id ?></td> -->
+                    <td><?php echo $list->id ?></td>
                     <td class="codigo"><?php echo $list->codigo ?></td>
-                    <td class="nombre"><?php echo $list->nombreAccesorio ?></td>
+                    <td class="nombreAccesorio"><?php echo $list->nombreAccesorio ?></td>
                     <td><?php echo $list->nDias; ?></td>
                     <td><?php echo $list->fecha; ?></td>
                     <td><?php echo $list->usuario; ?></td>
@@ -53,19 +53,19 @@ $datos = $mostrar->MostrarInfraestructura();
 </table>
 
 <!-- Script de Editar -->
-<!-- <script>
+<script>
     $(document).ready(function() {
-        $('#tbalmacen').Tabledit({
+        $('#tbInfra').Tabledit({
             deleteButton: false,
             editButton: false,
             columns: {
                 identifier: [0, 'id'],
                 editable: [
-                    [2, 'nombreArea']
+                    [2, 'nombreAccesorio']
                 ]
             },
             hideIdentifier: true,
-            url: 'mantenedor/actualizarZona.php',
+            url: 'mantenedor/actualizarInfra.php',
             onSuccess: function(data, textStatus, jqXHR) {
                 if (data.success) {
                     console.log(data);
@@ -75,7 +75,7 @@ $datos = $mostrar->MostrarInfraestructura();
 
         });
     });
-</script> -->
+</script>
 <!-- Script de Eliminar -->
 <!-- <script>
     // Utilizando jQuery

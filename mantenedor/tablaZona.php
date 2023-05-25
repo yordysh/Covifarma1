@@ -11,7 +11,6 @@ $data = $mostrar->MostrarAlmacenMuestra();
 $contador = 0;
 
 ?>
-
 <table id="tbalmacen" class="table table-sm mb-3 table-hover">
     <thead>
         <tr>
@@ -53,39 +52,6 @@ $contador = 0;
 </table>
 
 <!-- Script de Editar -->
-<!-- <script>
-    // Obtener el botón de edición
-    var editButton = document.querySelector('.edit-btn');
-
-    // Escuchar el evento de clic en el botón de edición
-    editButton.addEventListener('click', function() {
-        // Obtener el ID del elemento a editar
-        var id = this.getAttribute('data-id');
-
-        // Realizar la solicitud AJAX para obtener los datos del servidor
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'mantenedor/editarZona.php?id=' + id, true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    // Manejar la respuesta del servidor
-                    var response = JSON.parse(xhr.responseText);
-                    if (response.success) {
-                        // Llenar los campos del formulario con los datos recibidos
-                        document.getElementById('nombreArea').value = response.data.nombreArea;
-                        // document.getElementById('campo2').value = response.data.campo2;
-                        // ...
-                    } else {
-                        console.log('Error: ' + response.message);
-                    }
-                } else {
-                    console.log('Error en la solicitud AJAX');
-                }
-            }
-        };
-        xhr.send();
-    });
-</script> -->
 <script>
     $(document).ready(function() {
         $('#tbalmacen').Tabledit({

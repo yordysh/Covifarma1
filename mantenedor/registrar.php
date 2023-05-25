@@ -150,4 +150,22 @@ class m_almacen
       die($e->getMessage());
     }
   }
+
+  public function editarInfraestructura($nombreAccesorio, $id)
+  {
+    try {
+
+      $stmt = $this->bd->prepare("UPDATE infraestructuraAccesorios SET nombreAccesorio = :nombreAccesorio  WHERE id = :id");
+
+
+      $stmt->bindParam(':nombreAccesorio', $nombreAccesorio, PDO::PARAM_STR);
+      // $stmt->bindParam(':version', $version, PDO::PARAM_STR);
+      $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+      $update = $stmt->execute();
+      // $stm1 = "insert into version(version) values($version)";
+      return $update;
+    } catch (Exception $e) {
+      die($e->getMessage());
+    }
+  }
 }
