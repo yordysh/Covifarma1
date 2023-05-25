@@ -8,6 +8,7 @@ $dats = $conexion->Conectar();
 
 $mostrar = new m_almacen();
 $datos = $mostrar->MostrarInfraestructura();
+$dts = $mostrar->MostrarAlmacenMuestra();
 
 
 ?>
@@ -38,7 +39,7 @@ $datos = $mostrar->MostrarInfraestructura();
                     <td><?php echo $list->fecha; ?></td>
                     <td><?php echo $list->usuario; ?></td>
 
-                    <!-- <td><button class="btn btn-danger delete-btn" name="eliminar" id="delete" data-id="<?php echo $lista->id ?>"><i class="icon-trash"></i></button></td> -->
+                    <td><button class="btn btn-danger delete-btn" name="eliminar" id="delete" data-id="<?php echo $lista->id ?>"><i class="icon-trash"></i></button></td>
 
                 </tr>
             <?php
@@ -77,7 +78,7 @@ $datos = $mostrar->MostrarInfraestructura();
     });
 </script>
 <!-- Script de Eliminar -->
-<!-- <script>
+<script>
     // Utilizando jQuery
     $(document).ready(function() {
         $('.delete-btn').click(function() {
@@ -96,7 +97,7 @@ $datos = $mostrar->MostrarInfraestructura();
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: 'mantenedor/eliminar.php', // Ruta del archivo PHP que manejará la eliminación
+                        url: 'mantenedor/eliminarInfra.php', // Ruta del archivo PHP que manejará la eliminación
                         method: 'POST',
                         data: {
                             id: id
@@ -124,34 +125,5 @@ $datos = $mostrar->MostrarInfraestructura();
             });
         });
     });
-
-    // $(document).ready(function() {
-    //     $('.delete-btn').click(function() {
-    //         var id = $(this).data('id'); // Obtener el ID del registro a eliminar
-    //         var button = $(this); // Guardar referencia al botón actual
-
-    //         if (confirm("¿Estás seguro de eliminar este registro?")) {
-    //             $.ajax({
-    //                 url: 'mantenedor/eliminar.php', // Ruta del archivo PHP que manejará la eliminación
-    //                 method: 'POST',
-    //                 data: {
-    //                     id: id
-    //                 }, // Enviar el ID del registro al archivo PHP
-    //                 success: function(response) {
-
-    //                     // Eliminar la fila de la tabla correspondiente al botón eliminado
-    //                     button.closest('tr').remove();
-
-    //                     // Mostrar una notificación o mensaje de éxito utilizando SweetAlert
-    //                     Swal.fire('Éxito', 'Registro eliminado correctamente.', 'success');
-    //                 },
-    //                 error: function(xhr, status, error) {
-    //                     // Manejar los errores de la solicitud AJAX si es necesario
-    //                     console.log(xhr.responseText);
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
-</script> -->
+</script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->

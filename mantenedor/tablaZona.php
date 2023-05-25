@@ -52,6 +52,7 @@ $contador = 0;
 </table>
 
 <!-- Script de Editar -->
+<!-- <script src="../mantenedor/js/mantenedor.js"></script> -->
 <script>
     $(document).ready(function() {
         $('#tbalmacen').Tabledit({

@@ -15,7 +15,7 @@ try {
         $id = $input['id'];
         $nombreArea = $input['nombreArea'];
 
-        $up->editarAlmacen($nombreArea, $id, $version);
+        $up->editarAlmacen($nombreArea, $id);
     }
 } catch (Exception $e) {
     echo "Ocurrió un error con la base de datos: " . $e;

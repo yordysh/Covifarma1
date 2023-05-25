@@ -5,8 +5,8 @@ require_once "mantenedor/registrar.php";
 $conexion = new DataBase();
 $dats = $conexion->Conectar();
 
-// $mostrar = new m_almacen();
-// $data = $mostrar->MostrarAlmacenMuestra();
+$mostrar = new m_almacen();
+$datos = $mostrar->MostrarAlmacenMuestra();
 
 ?>
 
@@ -192,6 +192,16 @@ $dats = $conexion->Conectar();
 										<input type="text" id="nombreAccesorio" class="form-control" name="nombreAccesorio" required>
 										<label class="form-label">Nombre</label>
 									</div>
+									<div class="form-outline mb-4">
+										<select id="selectInfra" class="form-select" aria-label="Default select example">
+											<option value="none" selected disabled>Seleccione Zona/Areas</option>
+											<?php foreach ($datos as $lis) { ?>
+												<option value="<?php echo $lis->id; ?>" class="option"><?php echo $lis->id; ?></option>
+											<?php } ?>
+										</select>
+										<!-- <label class="form-label">Zona/Areas</label> -->
+									</div>
+
 
 									<!-- Text input fecha-->
 									<!-- <div class="form-outline mb-4">
