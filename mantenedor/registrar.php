@@ -82,20 +82,27 @@ class m_almacen
     }
   }
 
-  public function editarAlmacen($nombreArea, $id)
+  public function editarAlmacen($nombreArea, $id, $version)
   {
     try {
+      $this->bd->beginTransaction();
+      $stmt = $this->bd->prepare("UPDATE zonaAreas SET nombreArea = :nombreArea, version = :version  WHERE id = :id");
 
-      $stmt = $this->bd->prepare("UPDATE zonaAreas SET nombreArea = :nombreArea  WHERE id = :id");
-
-      // $versionModifico = new m_almacen();
-      // $version = $versionModifico->generarVersion();
+      $cod = new m_almacen();
+      $version = $cod->generarVersion();
 
       $stmt->bindParam(':nombreArea', $nombreArea, PDO::PARAM_STR);
-      // $stmt->bindParam(':version', $version, PDO::PARAM_STR);
+      $stmt->bindParam(':version', $version, PDO::PARAM_STR);
       $stmt->bindParam(':id', $id, PDO::PARAM_INT);
       $update = $stmt->execute();
-      // $stm1 = "insert into version(version) values($version)";
+
+      $stm1 = $this->bd->prepare("insert into version(version) values($version)");
+      $stm1->execute();
+      if ($stm1->execute()) {
+        $this->bd->commit();
+      } else {
+        $this->bd->rollBack();
+      }
       return $update;
     } catch (Exception $e) {
       die($e->getMessage());
