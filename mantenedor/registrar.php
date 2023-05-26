@@ -52,6 +52,7 @@ class m_almacen
     $resultado = $stm->fetch(PDO::FETCH_ASSOC);
     $maxCodigo = $resultado['codigo'];
     $nuevoCodigo = $maxCodigo + 1;
+
     $codigoAumento = str_pad($nuevoCodigo, 2, '0', STR_PAD_LEFT);
     return $codigoAumento;
   }
@@ -64,14 +65,22 @@ class m_almacen
     $resultado = $stm->fetch(PDO::FETCH_ASSOC);
     $maxContadorVersion = $resultado['version'];
     $nuevaversion = $maxContadorVersion + 1;
+    echo "max" . $maxContadorVersion;
+    echo "nuevo " . $nuevaversion;
+
     $versionAumento = str_pad($nuevaversion, 2, '0', STR_PAD_LEFT);
     return $versionAumento;
   }
 
-  public function InsertarAlmacen($nombreArea, $fecha)
+  public function InsertarAlmacen($nombreArea)
   {
     try {
-      if (empty($fecha)) {
+      if (isset($fecha)) {
+        // $fecha = retunrFechaActualphp();
+        if (empty($fecha)) {
+          $fecha = retunrFechaActualphp();
+        }
+      } else {
         $fecha = retunrFechaActualphp();
       }
 
@@ -94,6 +103,7 @@ class m_almacen
         $this->bd->rollBack();
       }
       return $insert;
+      echo " " . $insert;
     } catch (Exception $e) {
       die($e->getMessage());
     }
@@ -114,12 +124,14 @@ class m_almacen
       $update = $stmt->execute();
 
       $stm1 = $this->bd->prepare("insert into version(version) values($version)");
+
       $stm1->execute();
       if ($stm1->execute()) {
         $this->bd->commit();
       } else {
         $this->bd->rollBack();
       }
+      echo "hola kkk" . $version;
       return $update;
     } catch (Exception $e) {
       die($e->getMessage());

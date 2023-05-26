@@ -67,8 +67,9 @@ $contador = 0;
             hideIdentifier: true,
             url: 'mantenedor/actualizarZona.php',
             onSuccess: function(data, textStatus, jqXHR) {
-                if (data.success) {
-                    console.log(data);
+                console.log(data);
+                if (data == 1) {
+
                     Swal.fire('¡Éxito!', 'Se ha editado exitosamente', 'success');
                 }
             }

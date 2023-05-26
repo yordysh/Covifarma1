@@ -31,7 +31,7 @@ if (isset($_POST['insert'])) {
     if ($total > 0) {
         echo "0";
     } else {
-        $mostrar->InsertarAlmacen($nombreArea, $fecha);
+        $mostrar->InsertarAlmacen($nombreArea);
         echo "1";
     }
 }
