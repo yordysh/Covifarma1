@@ -16,11 +16,9 @@ if (isset($_POST['insert'])) {
 } else {
     $codigo = trim($_POST['codigo']);
     $nombreArea = trim($_POST['nombreArea']);
-    // $fecha = trim($_POST['fecha']);
-    // $version = trim($_POST['version']);
+
     $consulta = "SELECT COUNT(*) AS total FROM zonaAreas WHERE  nombreArea = :nombreArea";
     $resultado = $dats->prepare($consulta);
-    // $resultado->bindParam(':codigo', $codigo);
     $resultado->bindParam(':nombreArea', $nombreArea);
 
     $resultado->execute();

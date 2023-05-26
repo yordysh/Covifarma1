@@ -8,7 +8,6 @@ $dats = $conexion->Conectar();
 
 $mostrar = new m_almacen();
 $datos = $mostrar->MostrarInfraestructura();
-$dts = $mostrar->MostrarAlmacenMuestra();
 
 
 ?>
@@ -36,10 +35,11 @@ $dts = $mostrar->MostrarAlmacenMuestra();
                     <td class="codigo"><?php echo $list->codigo ?></td>
                     <td class="nombreAccesorio"><?php echo $list->nombreAccesorio ?></td>
                     <td><?php echo $list->nDias; ?></td>
-                    <td><?php echo $list->fecha; ?></td>
+                    <td><?php $fecha = $list->fecha;
+                        echo convFecSistema($fecha) ?></td>
                     <td><?php echo $list->usuario; ?></td>
 
-                    <td><button class="btn btn-danger delete-btn" name="eliminar" id="delete" data-id="<?php echo $lista->id ?>"><i class="icon-trash"></i></button></td>
+                    <td><button class="btn btn-danger delete-btn" name="eliminar" id="delete" data-id="<?php echo $list->id ?>"><i class="icon-trash"></i></button></td>
 
                 </tr>
             <?php

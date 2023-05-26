@@ -196,11 +196,15 @@ $datos = $mostrar->MostrarAlmacenMuestra();
 										<select id="selectInfra" class="form-select" aria-label="Default select example">
 											<option value="none" selected disabled>Seleccione Zona/Areas</option>
 											<?php foreach ($datos as $lis) { ?>
-												<option value="<?php echo $lis->id; ?>" class="option"><?php echo $lis->codigo; ?> <?php echo $lis->nombreArea; ?></option>
+												<option value="<?php echo $lis->codigo; ?>" class="option"><?php echo $lis->codigo; ?> <?php echo $lis->nombreArea; ?></option>
 											<?php } ?>
 										</select>
 										<!-- <label class="form-label">Zona/Areas</label> -->
 									</div>
+									<!-- <div class="form-outline mb-4">
+										<input type="hidden" id="valorSeleccionado" class="form-control" name="valorSeleccionado">
+
+									</div> -->
 
 
 									<!-- Text input fecha-->

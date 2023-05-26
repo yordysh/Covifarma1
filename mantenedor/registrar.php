@@ -60,16 +60,16 @@ class m_almacen
   public function generarVersion()
   {
 
-    $stm = $this->bd->prepare("SELECT MAX(version) as version FROM version");
+    // $stm = $this->bd->prepare("SELECT MAX(version) as version FROM version");
+    $stm = $this->bd->prepare("SELECT MAX(version) as version FROM zonaAreas");
     $stm->execute();
     $resultado = $stm->fetch(PDO::FETCH_ASSOC);
     $maxContadorVersion = $resultado['version'];
     $nuevaversion = $maxContadorVersion + 1;
-    echo "max" . $maxContadorVersion;
-    echo "nuevo " . $nuevaversion;
-
     $versionAumento = str_pad($nuevaversion, 2, '0', STR_PAD_LEFT);
     return $versionAumento;
+    echo "max" . $maxContadorVersion;
+    echo "nuevo " . $nuevaversion;
   }
 
   public function InsertarAlmacen($nombreArea)
@@ -94,16 +94,17 @@ class m_almacen
 
 
       $insert = $stm->execute();
-
+      echo "holasa" . $insert;
       $stm1 = $this->bd->prepare("insert into version(version) values($version)");
       $stm1->execute();
       if ($stm1->execute()) {
         $this->bd->commit();
+        echo "1";
       } else {
         $this->bd->rollBack();
       }
       return $insert;
-      echo " " . $insert;
+      echo "holasa" . $insert;
     } catch (Exception $e) {
       die($e->getMessage());
     }
@@ -133,6 +134,7 @@ class m_almacen
       }
       echo "hola kkk" . $version;
       return $update;
+      echo "1";
     } catch (Exception $e) {
       die($e->getMessage());
     }
@@ -169,19 +171,18 @@ class m_almacen
     }
   }
 
-  public function insertarInfraestructura($opcionSeleccionado, $nombreAccesorio, $fecha, $nDias, $usuario)
+  public function insertarInfraestructura($opcionSeleccionado, $nombreAccesorio, $nDias, $usuario)
   {
     try {
-      if (empty($fecha)) {
+      if (isset($fecha)) {
+        // $fecha = retunrFechaActualphp();
+        if (empty($fecha)) {
+          $fecha = retunrFechaActualphp();
+        }
+      } else {
         $fecha = retunrFechaActualphp();
       }
 
-      $cod = new m_almacen();
-      // $codigo = $cod->generarCodigo();
-
-      // $this->bd->beginTransaction();
-      // $stm1 = $this->bd->prepare("INSERT INTO zonaAreas (codigo)  VALUES ('$codigo')");
-      // $stm1->execute();
 
       $stm = $this->bd->prepare("INSERT INTO infraestructuraAccesorios (codigo,nombreAccesorio,nDias, fecha, usuario) 
                                   VALUES ('$opcionSeleccionado', '$nombreAccesorio','$nDias', '$fecha', '$usuario')");

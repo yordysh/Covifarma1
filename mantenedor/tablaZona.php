@@ -97,7 +97,7 @@ $contador = 0;
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: 'mantenedor/eliminar.php', // Ruta del archivo PHP que manejará la eliminación
+                        url: 'mantenedor/eliminarZona.php', // Ruta del archivo PHP que manejará la eliminación
                         method: 'POST',
                         data: {
                             id: id
